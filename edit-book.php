@@ -66,7 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Add your stylesheets and other head elements here -->
 </head>
 <body>
-
+<?php
+    include 'back.php'
+    ?>
     <h2>Edit Book</h2>
 
     <?php

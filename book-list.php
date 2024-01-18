@@ -2,7 +2,6 @@
 session_start();
 
 include("db_connection.php");
-
 // Check if the admin is not logged in
 if (!isset($_SESSION["admin_id"])) {
     header("Location: admin-login.php");
@@ -30,11 +29,14 @@ $total_pages = ceil($total_records / $limit);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List - Library Management System</title>
-    <link rel="stylesheet" href="styles/book-list.css">
+    <link rel="stylesheet" href="book-list.css">
 
     <!-- Add your stylesheets and other head elements here -->
 </head>
 <body>
+    <?php
+    include 'back.php'
+    ?>
 
     <h2>Book List</h2>
 

@@ -55,12 +55,16 @@ mysqli_close($connection);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Library Management System</title>
-    <link rel="stylesheet" href="/styles/login.css">
-
+    <link rel="stylesheet" href="admin-login.css">
+<style>
+    
+</style>
     <!-- Add your stylesheets and other head elements here -->
 </head>
 <body>
-
+<?php
+    include 'back.php'
+    ?>
     <h2>Library Management System - Admin Login</h2>
 
     <?php

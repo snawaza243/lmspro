@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Check if the admin is not logged in
 if (!isset($_SESSION["admin_id"])) {
     header("Location: admin-login.php");
@@ -22,35 +21,45 @@ $admin_gender = $_SESSION["admin_gender"];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Library Management System</title>
-    <link rel="stylesheet" href="/styles/dashboard.css">
-
-    <!-- Add your stylesheets and other head elements here -->
+    <link rel="stylesheet" href="admin-dashboard.css">
 </head>
 
 <body>
+<?php
+    include 'back.php'
+    ?>
+    <center class="admin-box">
+        <header>
+            <h1 id="dashboard-title">Admin Dashboard</h1>
+            <h2 id="welcome-message">Welcome, <?php echo $admin_name; ?>!</h2>
+        </header>
 
-    <h2>Admin Dashboard</h2>
+        <ul id="admin-info">
+            <li>Admin ID: <?php echo $_SESSION["admin_id"]; ?></li>
+            <li>Email: <?php echo $admin_email; ?></li>
+            <li>Gender: <?php echo $admin_gender; ?></li>
+        </ul>
 
-    <p>Welcome, <?php echo $admin_name; ?>!</p>
+        <!-- Add other redirection buttons here -->
+        <ul id="admin-buttons">
+            <li><a href="maintenance.php" class="button-link">Maintenance</a></li>
+            <li><a href="reports.php" class="button-link">Reports</a></li>
+            <li><a href="transactions.php" class="button-link">Transactions</a></li>
+        </ul>
 
-    <ul>
-        <li>Admin ID: <?php echo $_SESSION["admin_id"]; ?></li>
-        <li>Email: <?php echo $admin_email; ?></li>
-        <li>Gender: <?php echo $admin_gender; ?></li>
-    </ul>
+        <form id="logout-form" action="logout.php" method="post">
+            <a href="index.php" class="home-link">Home</a>
+            
 
-    <!-- Add other redirection buttons here -->
-    <ul>
-        <li><a href="maintenance.php">Maintenance</a></li>
-        <li><a href="reports.php">Reports</a></li>
-        <li><a href="transactions.php">Transactions</a></li>
-    </ul>
-    <form action="logout.php" method="post">
-        <input type="submit" value="Logout">
-    </form>
+            <input type="submit" class="logout-link" value="Logout">
+
+        </form>
+
+    </center>
+
     <?php
 
-    include 'book-list.php'
+    // include 'book-list.php'
 
     ?>
     <!-- Add your scripts and other body elements here -->

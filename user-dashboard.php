@@ -27,7 +27,7 @@ mysqli_close($connection);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard - Library Management System</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="user-dashboard.css">
 
     <!-- Add your stylesheets and other head elements here -->
 </head>
@@ -44,41 +44,91 @@ mysqli_close($connection);
 
     <!-- Display issued books table -->
     <h3>Issued Books</h3>
-    <table border="1">
-        <tr>
-            <th>Serial Number</th>
-            <th>Book ID</th>
-            <th>Book Name</th>
-            <th>Author</th>
-            <th>Category</th>
-            <th>Issued Date From</th>
-            <th>Due Date To</th>
-        </tr>
-        <?php
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>" . $row["serial_number"] . "</td>";
-            echo "<td>" . $row["book_id"] . "</td>";
-            echo "<td>" . $row["book_name"] . "</td>";
-            echo "<td>" . $row["author"] . "</td>";
-            echo "<td>" . $row["category"] . "</td>";
-            echo "<td>" . $row["issued_date_from"] . "</td>";
-
-            // echo "<td>" . $row["due_date_to"] . "</td>";
-
-
-            // Check if the due date is overdue (15 days from the issue date)
-            $due_date = date("Y-m-d", strtotime($row["issued_date_from"] . "+15 days"));
-            $today = date("Y-m-d");
-            $overdue_class = ($due_date < $today) ? 'overdue' : '';
-            echo "<td class='$overdue_class'>" . $due_date . "</td>";
-
-            echo "</tr>";
+    <style>
+        .issue-book{
+            width: fit-content;
+            overflow-y: auto;
         }
-        ?>
-    </table>
+
+        
+        .home-link {
+            background-color: #0056b3;
+            padding: 5px 10px;
+            color: #fff;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .button-link:hover,
+        .logout-link:hover {
+            background-color: #c0392b;
+            cursor: pointer;
+            
+
+        }
+
+        button,
+        .logout-link {
+            background-color: #e74c3c;
+            padding: 5px 10px;
+            color: #fff;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100px;
+            text-decoration: none;
+        }
+
+        button:hover,
+        .logout-link:hover {
+            background-color: #c0392b;
+            cursor: pointer;
+            text-decoration: none;
+
+
+        }
+    </style>
+    <div class="issue-book">
+
+        <table border="1">
+            <tr>
+                <th>Serial Number</th>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Issued Date From</th>
+                <th>Due Date To</th>
+            </tr>
+            <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td>" . $row["serial_number"] . "</td>";
+                echo "<td>" . $row["book_id"] . "</td>";
+                echo "<td>" . $row["book_name"] . "</td>";
+                echo "<td>" . $row["author"] . "</td>";
+                echo "<td>" . $row["category"] . "</td>";
+                echo "<td>" . $row["issued_date_from"] . "</td>";
+
+                // echo "<td>" . $row["due_date_to"] . "</td>";
+
+
+                // Check if the due date is overdue (15 days from the issue date)
+                $due_date = date("Y-m-d", strtotime($row["issued_date_from"] . "+15 days"));
+                $today = date("Y-m-d");
+                $overdue_class = ($due_date < $today) ? 'overdue' : '';
+                echo "<td class='$overdue_class'>" . $due_date . "</td>";
+
+                echo "</tr>";
+            }
+            ?>
+        </table>
+    </div>
+
     <!-- Add your scripts and other body elements here -->
-    <a href="logout.php">Logout</a>
+    <a href="logout.php" class="logout-link">Logout</a>
 
 </body>
 
