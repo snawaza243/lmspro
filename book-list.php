@@ -25,55 +25,89 @@ $total_pages = ceil($total_records / $limit);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List - Library Management System</title>
-    <link rel="stylesheet" href="book-list.css">
+    <!-- <link rel="stylesheet" href="book-list.css"> -->
+
+    <link rel="stylesheet" href="styles/listing_table.css">
+
 
     <!-- Add your stylesheets and other head elements here -->
 </head>
+
 <body>
-    <?php
-    include 'back.php'
-    ?>
+    <div class="scroll-container">
+        <div class="scroll-wrapper">
+            <?php
+            include 'admin_nav.php';
+            include 'back.php';
+            ?>
+            <main class="custom-main-view">
+                <section>
+                    <div class="container">
+                        <div class="section">
+                            <button onclick="location.href='add-book.php'">Add Book</button>
+                        </div>
+                        <h2>Book List</h2>
 
-    <h2>Book List</h2>
 
-    <table border="1">
-        <tr>
-            <th>Book ID</th>
-            <th>Book Name</th>
-            <th>Book Author</th>
-            <th>Category</th>
-            <th>Available Books</th>
-            <th>Action</th>
-        </tr>
+                        <table border="1">
+                            <tr>
+                                <th>Book ID</th>
+                                <th>Book Name</th>
+                                <th>Book Author</th>
+                                <th>Category</th>
+                                <th>Available Books</th>
+                                <th>Update/Delete</th>
+                                <th>Action</th>
 
-        <?php
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td><a href='edit-book.php?book_code=" . $row['book_code'] . "'>" . $row['book_name'] . "</a></td>";
-            echo "<td>" . $row['book_author'] . "</td>";
-            echo "<td>" . $row['category'] . "</td>";
-            echo "<td>" . $row['available_books'] . "</td>";
-            echo "<td><a href='issue-book.php'>Issue Book</a></td>";
-            echo "</tr>";
-        }
-        ?>
-    </table>
+                            </tr>
 
-    <!-- Pagination -->
-    <?php
-    echo "<ul>";
-    for ($i = 1; $i <= $total_pages; $i++) {
-        echo "<li><a href='book-list.php?page=" . $i . "'>" . $i . "</a></li>";
-    }
-    echo "</ul>";
-    ?>
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $row['id'] . "</td>";
+                                echo "<td><a href='edit-book.php?id=" . $row['id'] . "'>" . $row['book_name'] . "</a></td>";
+                                echo "<td>" . $row['book_author'] . "</td>";
+                                echo "<td>" . $row['category'] . "</td>";
+                                echo "<td>" . $row['available_books'] . "</td>";
+                                echo "<td>
+                        <a href='edit-book.php?id=" . $row['id'] . "'>Edit</a> |
+                        <a href='delete-book.php?id=" . $row['id'] . "'>Delete</a>
+            </td>";
+                                echo "<td><a href='issue-book.php'>Issue Book</a></td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </table>
 
-    <!-- Add your scripts and other body elements here -->
+                        <div style="display: flex; width:100%; overflow-x:auto">
+                            <!-- Pagination -->
+                            <?php
+                            echo "<ul>";
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                echo "<li><a href='book-list.php?page=" . $i . "'>" . $i . "</a></li>";
+                            }
+                            echo "</ul>";
+                            ?>
 
+                        </div>
+                        <br><br><br>
+                        <!-- Add your scripts and other body elements here -->
+                    </div>
+                </section>
+            </main>
+            <div class="footer">
+                <?php
+                // include 'book-list.php';
+                include 'includes/footer.php';
+                ?>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
