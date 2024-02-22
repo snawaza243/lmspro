@@ -51,42 +51,67 @@ mysqli_close($connection);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Library Management System</title>
-    <link rel="stylesheet" href="admin-login.css">
-<style>
-    
-</style>
+    <link rel="stylesheet" href="styles/form_style.css">
+    <style>
+
+    </style>
     <!-- Add your stylesheets and other head elements here -->
 </head>
+
 <body>
-<?php
-    include 'back.php'
-    ?>
-    <h2>Library Management System - Admin Login</h2>
+    <div class="scroll-container">
+        <div class="scroll-wrapper">
+            <?php
+            include 'admin_nav.php';
+            include 'back.php';
+            ?>
+            <main class="custom-main">
+                <section>
+                    <?php
+                    ?>
+                    <div class="container">
+                        <h2>Admin Login</h2>
+                        <?php
+                        // Display error message if any
+                        if (isset($error)) {
+                            echo "<p class='error-message'>$error</p>";
+                        }
+                        ?>
 
-    <?php
-    // Display error message if any
-    if (isset($error)) {
-        echo "<p style='color: red;'>$error</p>";
-    }
-    ?>
+                        <form action="" method="post">
+                            <div class="field">
+                                <label for="admin_id">Email ID:</label>
+                                <input type="text" name="admin_id" required>
+                            </div>
+                            <div class="field">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" required>
+                            </div>
+                            <div class="field">
+                                <button type="submit">Login</button>
+                            </div>
+                            <div class="field">
+                                <!-- <a href="index.php" class="ctm-btn">Cancel</a> -->
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </main>
+            <div class="footer">
+                <?php
+                include 'includes/footer.php';
+                ?>
+            </div>
+        </div>
+    </div>
 
-    <form action="" method="post">
-        <label for="admin_id">Admin ID:</label>
-        <input type="text" name="admin_id" required>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-
-        <input type="submit" value="Login">
-        <a href="index.php"><button type="button">Cancel</button></a>
-
-    </form>
-
-    <!-- Add your scripts and other body elements here -->
 
 </body>
+
 </html>

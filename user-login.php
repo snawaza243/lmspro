@@ -57,39 +57,61 @@ mysqli_close($connection);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login - Library Management System</title>
-    <link rel="stylesheet" href="user-login.css">
+    <link rel="stylesheet" href="styles/form_style.css">
+
 
     <!-- Add your stylesheets and other head elements here -->
 </head>
+
 <body>
 
-    <h2>Library Management System - User Login</h2>
+    <div class="scroll-container">
+        <div class="scroll-wrapper">
+            <?php
+            include 'user_nav.php';
+            include 'back.php';
+            ?>
+            <main class="custom-main">
+                <section>
+                    <?php
+                    ?>
+                    <div class="container">
+                        <h2>User Login</h2>
+                        <?php
+                        // Display error message if any
+                        if (isset($error)) {
+                            echo "<p style='color: red;'>$error</p>";
+                        }
+                        ?>
+                        <form action="" method="post">
+                            <label for="userId">User ID:</label>
+                            <input type="text" name="userId" required>
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" required>
+                            <div class="field">
+                                <button type="submit">Login</button>
+                            </div>
+                            <!-- Cancel button that redirects to the home page -->
+                            <!-- <a href="index.php"><button type="button">Cancel</button></a> -->
+                        </form>
+                    </div>
+                </section>
+            </main>
+            <div class="footer">
+                <?php
+                include 'includes/footer.php';
+                ?>
+            </div>
+        </div>
+    </div>
 
-    <?php
-    // Display error message if any
-    if (isset($error)) {
-        echo "<p style='color: red;'>$error</p>";
-    }
-    ?>
 
-    <form action="" method="post">
-        <label for="userId">User ID:</label>
-        <input type="text" name="userId" required>
-
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-
-        <input type="submit" value="Login">
-        
-        <!-- Cancel button that redirects to the home page -->
-        <a href="index.php"><button type="button">Cancel</button></a>
-    </form>
-
-    <!-- Add your scripts and other body elements here -->
 
 </body>
+
 </html>
